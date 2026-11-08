@@ -1,0 +1,138 @@
+{
+    "problem_formulation": {
+        "classification_target": "Churned",
+        "classification_type": "Binary Classification (0 = Retained, 1 = Churned)",
+        "classification_baseline_accuracy": 0.7657,
+        "classification_baseline_roc_auc": 0.7494,
+        "classification_business_impact": "High: Enables proactive churn prevention campaigns, loyalty incentives, and prioritized customer success interventions.",
+        "regression_target": "Lifetime_Value",
+        "regression_type": "Continuous Value Regression (Monetary CLV)",
+        "regression_baseline_r2": 0.4812,
+        "regression_baseline_rmse": 660.68,
+        "regression_business_impact": "Moderate: Forecasts spending volume for financial modeling.",
+        "selected_formulation": "Binary Classification (Customer Churn Prediction)",
+        "rationale": "Customer Churn Prediction addresses the direct commercial imperative of identifying and rescuing at-risk customers before loss of revenue. Churn status is a well-defined binary outcome with strong behavioural signals (cart abandonment, session frequency, customer service calls)."
+    },
+    "model_benchmarks": {
+        "Logistic Regression": {
+            "Accuracy": 0.7747,
+            "Precision": 0.6767,
+            "Recall": 0.4221,
+            "F1_Score": 0.5199,
+            "ROC_AUC": 0.791,
+            "Confusion_Matrix": [
+                [
+                    6527,
+                    583
+                ],
+                [
+                    1670,
+                    1220
+                ]
+            ]
+        },
+        "Decision Tree": {
+            "Accuracy": 0.8804,
+            "Precision": 0.8556,
+            "Recall": 0.7052,
+            "F1_Score": 0.7731,
+            "ROC_AUC": 0.8987,
+            "Confusion_Matrix": [
+                [
+                    6766,
+                    344
+                ],
+                [
+                    852,
+                    2038
+                ]
+            ]
+        },
+        "Random Forest (Default)": {
+            "Accuracy": 0.9053,
+            "Precision": 0.9263,
+            "Recall": 0.7304,
+            "F1_Score": 0.8168,
+            "ROC_AUC": 0.9213,
+            "Confusion_Matrix": [
+                [
+                    6942,
+                    168
+                ],
+                [
+                    779,
+                    2111
+                ]
+            ]
+        },
+        "Random Forest (Tuned)": {
+            "Accuracy": 0.9091,
+            "Precision": 0.9146,
+            "Recall": 0.7561,
+            "F1_Score": 0.8278,
+            "ROC_AUC": 0.9241,
+            "Confusion_Matrix": [
+                [
+                    6906,
+                    204
+                ],
+                [
+                    705,
+                    2185
+                ]
+            ]
+        }
+    },
+    "best_hyperparameters": {
+        "classifier__max_depth": 14,
+        "classifier__n_estimators": 100
+    },
+    "best_model_justification": {
+        "best_model": "Random Forest (Tuned)",
+        "roc_auc": 0.9241,
+        "accuracy": 0.9091,
+        "why_best": "Random Forest (Tuned) achieved the highest overall performance (ROC-AUC: 0.9241, Accuracy: 90.91%) for three key reasons:\n1. Variance Reduction through Bagging: A single Decision Tree suffers from high variance and easily overfits noisy customer records. Random Forest trains multiple diverse trees on bootstrap samples and averages their probabilistic predictions, drastically reducing generalization error.\n2. Non-Linear Interaction Modeling: Unlike Logistic Regression, which assumes a linear boundary in log-odds space, Random Forest effortlessly captures complex non-linear combinations between features (such as cart abandonment rate interacting with customer service calls and recency).\n3. Robustness to Skew & Outliers: Tree-based ensemble splits are invariant to monotonic feature scales, making the model remarkably resilient across diverse behavioural and monetary attributes."
+    },
+    "top_10_features": [
+        {
+            "Feature": "Customer_Service_Calls",
+            "Importance": 0.14716965777960203
+        },
+        {
+            "Feature": "Lifetime_Value",
+            "Importance": 0.1389418000957599
+        },
+        {
+            "Feature": "Cart_Abandonment_Rate",
+            "Importance": 0.110215955887224
+        },
+        {
+            "Feature": "Age",
+            "Importance": 0.06717634031465385
+        },
+        {
+            "Feature": "Discount_Usage_Rate",
+            "Importance": 0.056872435317116776
+        },
+        {
+            "Feature": "Days_Since_Last_Purchase",
+            "Importance": 0.055477890947023954
+        },
+        {
+            "Feature": "Total_Purchases",
+            "Importance": 0.05105412556552441
+        },
+        {
+            "Feature": "Average_Order_Value",
+            "Importance": 0.04517122111419191
+        },
+        {
+            "Feature": "Email_Open_Rate",
+            "Importance": 0.04447518878309142
+        },
+        {
+            "Feature": "Session_Duration_Avg",
+            "Importance": 0.03835871304930056
+        }
+    ]
+}
